@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+{% if config.DEBUG %}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="http://sfchronicle.com/external/css/global.article_global.r7.19.1.0.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="http://sfchronicle.com/external/css/global.article_local.r7.19.1.0.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="http://sfchronicle.com/external/css/global.ie8.r7.19.1.0.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="http://sfchronicle.com/external/css/global.article_print.r7.19.1.0.css" media="all" />
+    <script src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.min.js') }}"></script>
+  </head>
+{% endif %}
+
+  <body>
+    {% block content %}{% endblock %}
+
+    
+    
+    
+
+    {% if config.DEBUG %}
+    <script>document.write('<script src="http://'
+        + location.host.split(':')[0]
+        + ':35729/livereload.js"></'
+        + 'script>')</script>
+        
+    {% endif %}
+
+</body>
+</html>

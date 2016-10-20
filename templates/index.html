@@ -1,0 +1,351 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<style>
+.credit{font-family: 'Helvetica Neue',helvetica,arial,sans-serif;
+    font-size: 10px;
+    color: #222;}
+@font-face{
+  font-family:"AntennaRegular";
+  font-style: normal;
+  font-weight: normal;
+
+  src:url("https://s3-us-west-1.amazonaws.com/projects.sfchronicle.com/shared/fonts/antenna/regular/antennaregular.eot");
+
+  src:url("https://s3-us-west-1.amazonaws.com/projects.sfchronicle.com/shared/fonts/antenna/regular/antennaregular.eot?") format("embedded-opentype"),
+      url("https://s3-us-west-1.amazonaws.com/projects.sfchronicle.com/shared/fonts/antenna/regular/antennaregular.woff") format("woff"),
+      url("https://s3-us-west-1.amazonaws.com/projects.sfchronicle.com/shared/fonts/antenna/regular/antennaregular.ttf") format("truetype");
+}
+#map-container{
+	max-width: 900px;
+	margin:4em auto 0;
+  position: relative;
+  width: 100%;
+  overflow: auto;
+}
+
+.section-title{
+	font-family: 'AntennaRegular', Helvetica, sans-serif;
+	font-size: 25px;
+	color: #e62424;
+}
+
+#sections{
+  width: 340px;
+  float: left;
+margin-bottom:4em;
+}
+
+#sections div{
+  opacity: .2;
+  margin-bottom:120px;
+}
+
+#graph img{
+	width: 90%;
+}
+
+
+.graph-scroll-active{
+  opacity: 1 !important;
+
+}
+
+
+
+.fixed{
+	display: none;
+}
+
+#graph div {
+	  max-width: 400px;
+	opacity: 0;
+
+-webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+  position: fixed;
+top:9%;
+right: 13%;
+}
+
+
+
+.map-active {
+opacity: 1 !important; 
+}
+
+#mobile-map{
+ text-align: center;
+ display: none;
+}
+
+#mobile-map div{
+	max-width: 550px;
+	width: 100%;
+	margin:0 auto 45px;
+}
+
+#mobile-map img{
+	width: 100%;
+	max-width: 450px;
+}
+
+#map-title{
+	    width: 100%;
+}
+
+#map-title p{
+max-width: 540px;
+}
+
+#map-title h2{
+	    font-size: 30px;
+}
+
+@media (max-width: 900px){
+	#graph div{
+		right: 0;
+	}
+}
+
+
+@media (max-width: 780px){
+	#map-container{
+		display: none;
+	}
+	#mobile-map{
+		display: block;
+	}
+
+}
+</style>
+
+    
+<div id="map-container">
+	<div id="map-title">
+    		<h2>A horrific firestorm’s spread</h2>
+    		<p>On Oct. 20, 1991, the Oakland hills fire killed 25 people and wiped out nearly 3,500 homes. This map shows the inferno’s rapid spread. </p>
+		</div>
+	<div id="sections">
+    <div id="stick-here"></div>
+    	
+    	<div id="0">
+    		<h2 class="section-title">8:50 a.m.</h2>
+    		<p>Firefighters notice hot spots from a fire that had been put out the previous day in the Oakland hills.</p>
+    	</div>
+	    <div id="1">
+	      <h2 class="section-title">11:15 a.m.</h2>
+	      <p>The fire begins its spread, with high winds driving it.</p>
+	    </div>
+
+	    <div id="2">
+	      <h2 class="section-title">11:30 to 11:45 a.m.</h2>
+	      <p>By this time the fire is out of control, moving west and burning many structures. It is spreading through the Parkwood Apartments. Hiller Highlands is in its direct path.</p>
+	    </div>
+
+	    <div id="3">
+	      <h2 class="section-title">Noon to 12:15 p.m.</h2>
+	      <p>Several lives and dozens of structures have been lost. The north side of Temescal Canyon is burning and the blaze is spreading into Hiller Highlands and toward upper Broadway Terrace. The Parkwood Apartments complex is in flames. The fire has spread into Grandview Canyon and over Grizzly Peak Drive into Contra Costa County.</p>
+	    </div>
+
+	    <div id="4">
+	      <h2 class="section-title">12:45 to 1 p.m.</h2>
+	      <p>The fire is burning on five major fronts: (1) Rockridge district, west of Lake Temescal; (2) Grandview Canyon, threatening to jump Tunnel Road; (3) Chabot Road; (4) Claremont Canyon; (5) along the south side of Temescal Canyon, threatening upper Broadway Terrace. The historic Claremont Hotel is being threatened.</p>
+	    </div>
+
+	    <div id="5">
+	      <h2 class="section-title">2 p.m.</h2>
+	      <p>The fire advances through Rockridge and into the Forest Park area. The upper reaches of Broadway Terrace are burning, along Tunnel Road and Chabot Road, and in upper Claremont Canyon. Firefighters recognize the possibility that the flames will threaten the UC Berkeley campus. Two new fires are burning on the east slope in Contra Costa County.</p>
+	    </div>
+
+	    <div id="6">
+	      <h2 class="section-title">4 p.m.</h2>
+	      <p>The Oakland and Berkeley firefighting operations begin to work together to battle the blaze, which continues its spread.</p>
+	    </div>
+
+	    <div id="7">
+	      <h2 class="section-title">6 p.m.</h2>
+	      <p>New teams from across the Bay Area are deployed to battle the fire.</p>
+	    </div>
+
+	    <div id="8">
+	      <h2 class="section-title">Conclusion</h2>
+	      <p>This shows the Oakland hills fire’s ultimate spread. The inferno led to improved policies and equipment for fire and emergency crews, as well as fireproof materials on homes and roofs. The highly flammable trees that fueled the blaze have since regrown.</p>
+	    </div>
+
+    </div>
+
+    
+
+	<div id="graph" class="fixed">
+		<div id="10">
+	      <img src="http://projects.sfchronicle.com/2016/oakland-hills-fire/img/0.png">
+	    </div>
+		<div id="11">
+	      <img src="http://projects.sfchronicle.com/2016/oakland-hills-fire/img/1.png">
+	    </div>
+
+	    <div id="12">
+	      <img src="http://projects.sfchronicle.com/2016/oakland-hills-fire/img/2.png">
+	    </div>
+
+	    <div id="13">
+	      <img src="http://projects.sfchronicle.com/2016/oakland-hills-fire/img/3.png">
+	    </div>
+
+	    <div id="14">
+	      <img src="http://projects.sfchronicle.com/2016/oakland-hills-fire/img/4.png">
+	    </div>
+
+	    <div id="15">
+	      <img src="http://projects.sfchronicle.com/2016/oakland-hills-fire/img/5.png">
+	    </div>
+
+	    <div id="16">
+	      <img src="http://projects.sfchronicle.com/2016/oakland-hills-fire/img/6.png?">
+	    </div>
+
+	    <div id="17">
+	      <img src="http://projects.sfchronicle.com/2016/oakland-hills-fire/img/7.png?">
+	    </div>
+
+	    <div id="18">
+	      <img style="width:80%;" src="http://projects.sfchronicle.com/2016/oakland-hills-fire/img/8.png?">
+	    </div>
+	  	
+	</div>
+
+</div>
+
+<div id="mobile-map">
+<h2>A horrific firestorm’s spread</h2>
+    		<p>On Oct. 20, 1991, the Oakland hills fire killed 25 people and wiped out nearly 3,500 homes. This map shows the inferno’s rapid spread. </p>
+	<div>
+		<h2 class="section-title">8:50 a.m.</h2>
+    	<p>Firefighters notice hot spots from a fire that had been put out the previous day in the Oakland hills.</p>	
+    	<img src="http://projects.sfchronicle.com/2016/oakland-hills-fire/img/0.png">
+	</div>
+
+	<div>
+		<h2 class="section-title">11:15 a.m.</h2>
+    	<p>The fire begins its spread, with high winds driving it.</p>	
+    	<img src="http://projects.sfchronicle.com/2016/oakland-hills-fire/img/1.png">
+	</div>
+
+	<div>
+		<h2 class="section-title">11:30 to 11:45 a.m.</h2>
+    	<p>By this time the fire is out of control, moving west and burning many structures. It is spreading through the Parkwood Apartments. Hiller Highlands is in its direct path.</p>
+    	<img src="http://projects.sfchronicle.com/2016/oakland-hills-fire/img/2.png">
+	</div>
+
+	<div>
+		<h2 class="section-title">Noon to 12:15 p.m.</h2>
+    	<p>Several lives and dozens of structures have been lost. The north side of Temescal Canyon is burning and the blaze is spreading into Hiller Highlands and toward upper Broadway Terrace. The Parkwood Apartments complex is in flames. The fire has spread into Grandview Canyon and over Grizzly Peak Drive into Contra Costa County. </p>	
+    	<img src="http://projects.sfchronicle.com/2016/oakland-hills-fire/img/3.png">
+	</div>
+
+	<div>
+		<h2 class="section-title">12:45 to 1 p.m.</h2>
+    	<p>The fire is burning on five major fronts: (1) Rockridge district, west of Lake Temescal; (2) Grandview Canyon, threatening to jump Tunnel Road; (3) Chabot Road; (4) Claremont Canyon; (5) along the south side of Temescal Canyon, threatening upper Broadway Terrace. The historic Claremont Hotel is being threatened.</p>	
+    	<img src="http://projects.sfchronicle.com/2016/oakland-hills-fire/img/4.png">
+	</div>
+
+	<div>
+		<h2 class="section-title">2 p.m.</h2>
+    	<p>The fire advances through Rockridge and into the Forest Park area. The upper reaches of Broadway Terrace are burning, along Tunnel Road and Chabot Road, and in upper Claremont Canyon. Firefighters recognize the possibility that the flames will threaten the UC Berkeley campus. Two new fires are burning on the east slope in Contra Costa County.</p>	
+    	<img src="http://projects.sfchronicle.com/2016/oakland-hills-fire/img/5.png">
+	</div>
+
+	<div>
+		<h2 class="section-title">4 p.m.</h2>
+    	<p>The Oakland and Berkeley firefighting operations begin to work together to battle the blaze, which continues its spread.</p>	
+    	<img src="http://projects.sfchronicle.com/2016/oakland-hills-fire/img/6.png">
+	</div>
+
+	<div>
+		<h2 class="section-title">6 p.m.</h2>
+    	<p>New teams from across the Bay Area are deployed to battle the fire.</p>	
+    	<img src="http://projects.sfchronicle.com/2016/oakland-hills-fire/img/7.png">
+	</div>
+
+	<div>
+		<h2 class="section-title">Conclusion</h2>
+    	<p>This shows the Oakland hills fire’s ultimate spread. The inferno led to improved policies and equipment for fire and emergency crews, as well as fireproof materials on homes and roofs. The highly flammable trees that fueled the blaze have since regrown. </p>	
+    	<img src="http://projects.sfchronicle.com/2016/oakland-hills-fire/img/8.png">
+	</div>
+
+
+
+</div>
+<span class="credit">Graphics by: Todd Trumbull</span><span class="credit" style="float:right;">
+                                            Developed by: Lucio Villa
+                                    </span>
+<hr>
+<script>
+	function activate() {
+  var window_top = document.body.scrollTop;
+  var div_top = document.getElementById('stick-here').getBoundingClientRect().top + window_top;
+
+  var div_bottom = document.getElementById('8').getBoundingClientRect().bottom + window_top - 30;
+
+  for (var i = 0; i < 9; i++ ) {
+  	var a = document.getElementById(i);
+  	var at = document.getElementById(i);
+  	var gr = document.getElementById('1'+i);
+    if (screen.width > 480) {
+      if (i == 8) {
+        var ed_top = a.getBoundingClientRect().top + window_top-200;
+      	var ede_top = a.getBoundingClientRect().bottom + window_top-200;
+      } else {
+        var ed_top = a.getBoundingClientRect().top + window_top - 200;
+      	var ede_top = a.getBoundingClientRect().bottom + window_top - 100;
+      }
+    } else {
+      if (i == 8) {
+        var ed_top = a.getBoundingClientRect().top + window_top-20;
+        var ede_top = a.getBoundingClientRect().bottom + window_top-200;
+      } else {
+        var ed_top = a.getBoundingClientRect().top + window_top-20;
+        var ede_top = a.getBoundingClientRect().bottom + window_top - 100;
+      }
+    }
+
+    if (window_top > ed_top && window_top < ede_top) {
+	        at.classList.add('graph-scroll-active');
+          a.classList.add('graph-scroll-active');
+          gr.classList.add('map-active');
+    	}
+  	else {
+          at.classList.remove('graph-scroll-active');
+          a.classList.remove('graph-scroll-active');
+          gr.classList.remove('map-active');
+  	}
+  }
+
+  if (window_top > div_top -100 && window_top < div_bottom - 300 ){
+  	document.getElementById('graph').classList.remove('fixed');
+  }
+  else {
+  	document.getElementById('graph').classList.add('fixed');
+  }
+
+
+};
+
+$(window).scroll(function() {activate()});
+</script>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+  $(document).ready(function() {
+    App.init();
+  });
+</script>
+{% endblock %}

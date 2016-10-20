@@ -1,0 +1,21 @@
+{
+  "name": "oakland-fire",
+  "version": "0.0.1",
+  "homepage": "https://github.com/sfchronicle/oakland-fire",
+  "authors": [
+    "Lucio Villa <lucio310@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation-sites": "~6.2.0",
+    "jquery": "~2.2.0",
+    "normalize-scss": "normalize.scss#^4.2.1"
+  }
+}
